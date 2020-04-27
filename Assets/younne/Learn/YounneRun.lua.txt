@@ -1,0 +1,37 @@
+
+
+function luaRun()
+	self:Run()
+end
+
+bland = 
+{
+	list = {'a1', 'c2', 'd3'}, 
+
+	get_Item = 
+		function(self, index)
+           return self.list[index + 1]
+		end,
+
+	 set_Item = function(self, index, value)
+                            self.list[index + 1] = value
+                            self:notify({name = index, value = value})
+                        end,
+
+	add_PropertyChangeds = 
+		 function(self, delegate)
+	        if self.notifylist == nil then
+		                        self.notifylist = {}
+	                        end
+	                        table.insert(self.notifylist, delegate)
+                            print('add',delegate)
+         end,
+
+	notify = function(self, evt)
+	                        if self.notifylist ~= nil then
+		                        for i=1, #self.notifylist do
+			                        self.notifylist[i](self, evt)
+		                        end
+	                        end	
+                        end,
+}
