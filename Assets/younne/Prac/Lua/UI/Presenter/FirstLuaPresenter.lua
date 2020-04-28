@@ -1,13 +1,13 @@
 
 local Parent = require "UI/Base/UIPresenter";
 
-local UI = class("UIP_Loading", Parent);
+local  FirstLuaPresenter = class("FirstLuaPresenter", Parent)
 
-local  FirstLuaCtrl = class()
+FirstLuaPresenter.new()
 
+function FirstLuaPresenter:ctor()  
+        print("FirstLuaPresenter:ctor")
 
-print('FirstLuaCtrl')
-
-local UIManager = CS.Younne.UIManager.Instance
-
-UIManager:OpenUIForLua('FirstLuaView')
+       	local uimanager = require('UIManager')
+       	uimanager.Init( )
+end  
