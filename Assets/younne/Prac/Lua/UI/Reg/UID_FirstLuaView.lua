@@ -1,22 +1,28 @@
 
-print('FirstLuaView')
+print('UID_FirstLuaView')
 
-FirstLuaView = {}
+local UID_FirstLuaView = {}
 
 
-function FirstLuaView.awake(obj )
-	print('awake')
+function UID_FirstLuaView.Init(obj )
+	print('Init')
 end
 
-function  FirstLuaView.start( )
-	print('start')
+function  UID_FirstLuaView.OnCreated( )
+	print('OnCreated')
 end
 
-function FirstLuaView.update( )
-	-- print('update')
+function UID_FirstLuaView.OnEnable( )
+	-- print('OnEnable')
 end
 
 
-function FirstLuaView.ondestroy( )
-	print('ondestroy')
+function UID_FirstLuaView.OnDisable( )
+	print('OnDisable')
 end
+
+function UID_FirstLuaView.OnDestroy( )
+	print('OnDestroy')
+end
+
+return UID_FirstLuaView

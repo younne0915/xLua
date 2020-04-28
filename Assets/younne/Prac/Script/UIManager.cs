@@ -5,13 +5,24 @@ using XLua;
 
 namespace Younne
 {
-    public delegate void CreateLuaUIDelegate(string name, out );
+    public delegate void OnInitDel();
+    public delegate void OnCreatedDel(View view);
+    public delegate void OnEnableDel();
+    public delegate void OnDisableDel();
+    public delegate void OnDestroyDel();
+
+    public delegate void CreateLuaUIDel(string name, 
+        out OnInitDel onInitDel , out OnCreatedDel onCreatedDel,
+        out OnEnableDel onEnableDel, out OnDisableDel onDisableDel, 
+        out OnDestroyDel onDestroyDel);
+
     [Hotfix]
     [GCOptimize]
     [LuaCallCSharp]
     public class UIManager : MonoBehaviour
     {
         public static UIManager Instance = null;
+        private CreateLuaUIDel _createLuaUIDel;
 
         private void Awake()
         {
@@ -29,8 +40,9 @@ namespace Younne
             
         }
 
-        public void Init()
+        public void Init(CreateLuaUIDel createLuaUIDel)
         {
+            _createLuaUIDel = createLuaUIDel;
 
         }
     }
