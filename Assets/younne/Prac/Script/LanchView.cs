@@ -27,14 +27,18 @@ namespace Younne
                 _tipsView = null;
             }
 
-            GameObject obj = UIManager.Instance.OpenUI("TipsView");
+            GameObject obj = UIManager.OpenUI("TipsView");
             _tipsView = obj.GetComponent<TipsView>();
             _tipsView.SetTips();
         }
 
         void NewBtnClick()
         {
-            LuaManager.Instance.LoadLuaFile("TempCtrl");
+            //string path = "require 'UI/Presenter/FirstLuaPresenter'; New()";
+            //LuaManager.Instance.DoString(path);
+
+            string scriptText = @"require('Hotfix/Hotfix')";
+            LuaManager.Instance.DoString(scriptText);
         }
     }
 

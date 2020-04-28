@@ -12,12 +12,13 @@ M.UI = {};
 
 
 local function REGUI(name)
+	GameLog.Log('REGUI name = '..name)
 	if name == nil then
 		print("lua reg ui error: name is null");
 		return;
 	end
 
-	local dpath = "UI/Reg/Data/UID_" .. name;
+	local dpath = "UI/Reg/UID_" .. name;
 	local ui_data = require (dpath);
 	if ui_data == nil then
 		print("lua reg ui error: reg data is not exist");

@@ -27,6 +27,10 @@ namespace Younne
         private void Awake()
         {
             Instance = this;
+        }
+
+        private void Start()
+        {
             Init();
         }
 
@@ -52,9 +56,8 @@ namespace Younne
             return File.ReadAllBytes(stringBuilder.ToString());
         }
 
-        public void LoadLuaFile(string luaName)
+        public void DoString(string path)
         {
-            string path = string.Format("require '{0}'", luaName);
             luaEnv.DoString(path);
         }
 

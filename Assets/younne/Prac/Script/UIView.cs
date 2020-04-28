@@ -7,17 +7,20 @@ namespace Younne
     public class UIView
     {
         public View view;
-        private string _prefabName;
+        public string viewName
+        {
+            get;
+            private set;
+        }
 
         public UIView(string prefabName)
         {
-            _prefabName = prefabName;
+            viewName = prefabName;
         }
 
-        public void CreateUI()
+        public void SetTip()
         {
-            GameObject obj = GameObject.Instantiate(Resources.Load<GameObject>(_prefabName));
-            view = obj.AddComponent<View>();
+            Debug.LogErrorFormat("SetTip = {0}", viewName);
         }
     }
 }

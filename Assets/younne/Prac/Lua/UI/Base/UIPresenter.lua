@@ -2,8 +2,6 @@
 
 local UIPresenter = class("UIPresenter");
 
-
-
 function UIPresenter:ctor(data)
 	GameLog.Log("ui presenter do create");
 	self._data = data;

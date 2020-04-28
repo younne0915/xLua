@@ -188,3 +188,5 @@ M.TableLength = TableLength;
 GameUtils = NewConst(M, true);
 
 --return M;
+
+return GameUtils

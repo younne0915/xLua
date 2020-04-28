@@ -96,6 +96,7 @@ function class(classname, super)
         cls.__index = cls  
   
         function cls.new(...)  
+            print('new : ' ..classname)
             local instance = setmetatable({}, cls)  
             instance.class = cls  
 			instance:ctor(...)  

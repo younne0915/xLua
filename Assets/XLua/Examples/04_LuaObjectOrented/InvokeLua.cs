@@ -23,7 +23,7 @@ namespace XLuaTest
         [CSharpCallLua]
         public interface ICalc
         {
-            event EventHandler<PropertyChangedEventArgs> PropertyChangeds;
+            event EventHandler<PropertyChangedEventArgs> PropertyChanged;
 
             int Add(int a, int b);
             int Mult { get; set; }
@@ -81,7 +81,7 @@ namespace XLuaTest
                 Calc = {
 	                New = function (mult, ...)
                         print(...)
-                        return setmetatable({Mult = mult, list = {'wu','yu','cccc'}}, calc_mt)
+                        return setmetatable({Mult = mult, list = {'aaaa','bbbb','cccc'}}, calc_mt)
                     end
                 }
 	        ";
@@ -105,11 +105,11 @@ namespace XLuaTest
             Debug.Log("list[0]=" + calc[0]);
             Debug.Log("list[1]=" + calc[1]);
 
-            calc.PropertyChangeds += Notify;
+            calc.PropertyChanged += Notify;
             calc[1] = "dddd";
             Debug.Log("list[1]=" + calc[1]);
 
-            calc.PropertyChangeds -= Notify;
+            calc.PropertyChanged -= Notify;
 
             calc[1] = "eeee";
             Debug.Log("list[1]=" + calc[1]);
@@ -120,6 +120,10 @@ namespace XLuaTest
             Debug.Log(string.Format("{0} has property changed {1}={2}", sender, e.name, e.value));
         }
 
+        // Update is called once per frame
+        void Update()
+        {
 
+        }
     }
 }

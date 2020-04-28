@@ -5,45 +5,57 @@ using XLua;
 
 namespace Younne
 {
-    public delegate void OnInitDel();
-    public delegate void OnCreatedDel(View view);
-    public delegate void OnEnableDel();
-    public delegate void OnDisableDel();
-    public delegate void OnDestroyDel();
+    public delegate void OnVoidDel();
+    public delegate void OnPagramUIViewDel(UIView view);
 
-    public delegate void CreateLuaUIDel(string name, 
-        out OnInitDel onInitDel , out OnCreatedDel onCreatedDel,
-        out OnEnableDel onEnableDel, out OnDisableDel onDisableDel, 
-        out OnDestroyDel onDestroyDel);
+    public delegate void CreateLuaUIDel(string name,
+        out OnVoidDel onInitDel, out OnPagramUIViewDel onCreatedDel,
+        out OnVoidDel onEnableDel, out OnVoidDel onDisableDel,
+        out OnVoidDel onDestroyDel);
+
 
     [Hotfix]
     [GCOptimize]
-    [LuaCallCSharp]
-    public class UIManager : MonoBehaviour
+    public partial class UIManager : MonoBehaviour
     {
         public static UIManager Instance = null;
-        private CreateLuaUIDel _createLuaUIDel;
+        static CreateLuaUIDel _createLuaUIDel;
+        
+        string _prefabName;
 
         private void Awake()
         {
             Instance = this;
         }
 
-        public GameObject OpenUI(string prefabName)
+        public static GameObject OpenUI(string prefabName)
         {
             return Instantiate(Resources.Load<GameObject>(prefabName));
         }
         
-        public void OpenUIForLua(string prefabName)
+        public static void OpenUIForLua(string prefabName)
         {
-            LuaPresenter presenter = new LuaPresenter(prefabName);
-            
+            if (_createLuaUIDel != null)
+            {
+                OnVoidDel onInitDel;
+                OnPagramUIViewDel onCreatedDel;
+                OnVoidDel onEnableDel;
+                OnVoidDel onDisableDel;
+                OnVoidDel onDestroyDel;
+
+                _createLuaUIDel(prefabName, out onInitDel,
+                    out onCreatedDel, out onEnableDel,
+                    out onDisableDel, out onDestroyDel);
+
+                LuaPresenter presenter = new LuaPresenter(prefabName);
+                presenter.SetLuaEvent(onCreatedDel, onEnableDel, onDisableDel, onDestroyDel);
+                presenter.Initialize();
+            }
         }
 
-        public void Init(CreateLuaUIDel createLuaUIDel)
+        public static void Init(CreateLuaUIDel createLuaUIDel)
         {
             _createLuaUIDel = createLuaUIDel;
-
         }
     }
 }

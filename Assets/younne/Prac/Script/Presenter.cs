@@ -6,12 +6,20 @@ namespace Younne
 {
     public class Presenter
     {
-        private UIView uiView;
+        public UIView uiView
+        {
+            get;
+            private set;
+        }
 
         public Presenter(string prefabName)
         {
             uiView = new UIView(prefabName);
-            uiView.CreateUI();
+        }
+
+        public virtual void Initialize()
+        {
+
         }
     }
 }

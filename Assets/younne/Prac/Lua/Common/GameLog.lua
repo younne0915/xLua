@@ -37,3 +37,7 @@ function GameLog.Init(mainThread)
 	--log.mainThread = mainThread;
 	GameLog = GameUtils.DeepConst(log);
 end
+
+GameLog.Init()
+
+return GameLog
